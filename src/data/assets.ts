@@ -1,20 +1,22 @@
 /**
  * Todos os caminhos de mídia do site vivem aqui.
- * Para trocar um asset: substitua o arquivo em src/assets/ mantendo o nome,
- * ou aponte a chave abaixo para um novo arquivo. Nenhum componente referencia URLs diretamente.
+ *
+ * Os arquivos ficam em src/assets/ neste repositório e são servidos pelo jsDelivr
+ * (CDN gratuito para repositórios públicos do GitHub), fixados num commit para cache permanente.
+ *
+ * Para trocar um asset:
+ *   1. substitua o arquivo em src/assets/ mantendo o nome e faça commit/push;
+ *   2. atualize ASSET_COMMIT abaixo com o SHA desse commit.
+ * Nenhum componente referencia URLs diretamente.
  *
  * Cada imagem existe em 4 variantes: <nome>.avif, <nome>.webp (2400px) e <nome>-sm.avif/.webp (1200px).
  */
-import heroMp4 from '../assets/videos/hero.mp4';
-import heroWebm from '../assets/videos/hero.webm';
-import heroMobileMp4 from '../assets/videos/hero-mobile.mp4';
-import heroPoster from '../assets/images/hero-poster.webp';
+const REPO = 'pedrodavihort-crypto/orvane-vx6';
+const ASSET_COMMIT = '2a598231e5c9c88b2350ec0a015aa9b2aba735e0';
+const ASSET_BASE = `https://cdn.jsdelivr.net/gh/${REPO}@${ASSET_COMMIT}/src/assets`;
 
-const files = import.meta.glob('../assets/images/*.{webp,avif}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-}) as Record<string, string>;
+const img = (file: string) => `${ASSET_BASE}/images/${file}`;
+const vid = (file: string) => `${ASSET_BASE}/videos/${file}`;
 
 export interface ImageAsset {
   avif: string;
@@ -23,26 +25,20 @@ export interface ImageAsset {
   webpSm: string;
 }
 
-const file = (name: string) => {
-  const url = files[`../assets/images/${name}`];
-  if (!url) throw new Error(`[assets] missing image: ${name}`);
-  return url;
-};
-
 export const image = (name: string): ImageAsset => ({
-  avif: file(`${name}.avif`),
-  webp: file(`${name}.webp`),
-  avifSm: file(`${name}-sm.avif`),
-  webpSm: file(`${name}-sm.webp`),
+  avif: img(`${name}.avif`),
+  webp: img(`${name}.webp`),
+  avifSm: img(`${name}-sm.avif`),
+  webpSm: img(`${name}-sm.webp`),
 });
 
 export const media = {
   hero: {
-    poster: heroPoster,
+    poster: img('hero-poster.webp'),
     sources: [
-      { src: heroMobileMp4, type: 'video/mp4', media: '(max-width: 767px)' },
-      { src: heroWebm, type: 'video/webm' },
-      { src: heroMp4, type: 'video/mp4' },
+      { src: vid('hero-mobile.mp4'), type: 'video/mp4', media: '(max-width: 767px)' },
+      { src: vid('hero.webm'), type: 'video/webm' },
+      { src: vid('hero.mp4'), type: 'video/mp4' },
     ],
   },
   heroThumb: image('street-tall'),
