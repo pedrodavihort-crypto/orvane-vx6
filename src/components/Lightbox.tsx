@@ -68,7 +68,7 @@ export function Lightbox({ items, index, onClose, onIndex }: Props) {
     );
   }, [index, open, reduced]);
 
-  if (!open) return null;
+  if (index === null) return null;
   const item = items[index];
 
   return (
