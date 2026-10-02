@@ -306,20 +306,20 @@ html.lenis body {
   }
 }
 
-/* Reduced motion: tudo visível, sem transições longas */
+/* Reduced motion: tudo visível, sem transições longas (a menos que ?motion=full) */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html:not(.force-motion) *,
+  html:not(.force-motion) *::before,
+  html:not(.force-motion) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .cursor {
+  html:not(.force-motion) .cursor {
     display: none;
   }
-  [data-cursor] {
+  html:not(.force-motion) [data-cursor] {
     cursor: auto;
   }
 }
