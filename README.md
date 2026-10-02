@@ -31,7 +31,7 @@ src/
 ## Trocar o carro
 
 1. **Conteúdo** — edite `src/data/car.ts` (nome, specs, textos, recursos, opções do configurador, galeria, navegação).
-2. **Mídia** — substitua os arquivos em `src/assets/` mantendo os nomes, faça commit/push e atualize `ASSET_COMMIT` em `src/data/assets.ts` com o SHA do commit. A mídia é servida pelo jsDelivr a partir deste repositório público (por isso o deploy na Vercel só envia o código). Nenhum componente usa URL solta.
+2. **Mídia** — substitua os arquivos em `src/assets/` mantendo os nomes, ou aponte as chaves em `src/data/assets.ts`. Nenhum componente usa URL solta.
    - Cada imagem precisa das 4 variantes (`.avif`, `.webp`, `-sm.avif`, `-sm.webp`).
    - Configurador: `studio-{black|white|red|silver}-{20|21}` e `interior-{black|red|carbon}` — mesmo enquadramento em todas para o crossfade ficar perfeito.
    - Vídeo do hero: até ~6–10 s em loop, H.264 + VP9, sem áudio, com `hero-poster.webp` do primeiro frame.
