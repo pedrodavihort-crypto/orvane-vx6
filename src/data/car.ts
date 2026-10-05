@@ -102,7 +102,13 @@ export const configurator = {
     { id: 'black', name: 'Obsidian Black', swatch: '#141416' },
     { id: 'white', name: 'Glacier White', swatch: '#e2e1dc' },
     { id: 'red', name: 'Ember Red', swatch: '#7c0d14' },
-    { id: 'silver', name: 'Mercury Silver', swatch: '#9a9ea3' },
+    { id: 'blue', name: 'Abyss Blue', swatch: '#1d3f8f' },
+  ],
+  angles: [
+    { id: 'three-quarter', name: '3/4' },
+    { id: 'front', name: 'Front' },
+    { id: 'side', name: 'Side' },
+    { id: 'rear', name: 'Rear' },
   ],
   wheels: [
     { id: '20', name: '20" Aero forged' },
@@ -118,6 +124,7 @@ export const configurator = {
 export type Paint = (typeof configurator.exterior)[number]['id'];
 export type Wheels = (typeof configurator.wheels)[number]['id'];
 export type Trim = (typeof configurator.interior)[number]['id'];
+export type Angle = (typeof configurator.angles)[number]['id'];
 
 /* ───────────── Gallery ───────────── */
 export interface GalleryItem {
@@ -131,12 +138,12 @@ export interface GalleryItem {
 
 export const gallery: GalleryItem[] = [
   { id: 'coast', image: media.street, alt: 'VX6 on a coast road at golden hour', caption: 'Coast road, last light', slot: 'large' },
-  { id: 'front', image: media.detail.front, alt: 'Low sun across the VX6 light blade and bonnet', caption: 'Light signature', slot: 'small' },
-  { id: 'road', image: media.detail.road, alt: 'VX6 following the cliff road', caption: 'Along the cliffs', slot: 'wide' },
-  { id: 'ocean', image: media.detail.coast, alt: 'VX6 with the ocean behind it', caption: 'Ocean line', slot: 'horizontal' },
-  { id: 'approach', image: media.detail.approach, alt: 'VX6 approaching head-on', caption: 'Obsidian Black', slot: 'tall' },
+  { id: 'approach', image: media.detail.approach, alt: 'VX6 approaching head-on in the low sun', caption: 'Last light', slot: 'small' },
+  { id: 'red', image: media.carView('red', 'three-quarter'), alt: 'Ember Red VX6 on a mountain road at dusk', caption: 'Ember Red', slot: 'wide' },
+  { id: 'white', image: media.carView('white', 'side'), alt: 'Glacier White VX6 in profile against the mountains', caption: 'Glacier White', slot: 'horizontal' },
+  { id: 'blue', image: media.carView('blue', 'rear'), alt: 'Abyss Blue VX6 from behind, full-width tail light', caption: 'Abyss Blue', slot: 'tall' },
   { id: 'carbon', image: media.trim('carbon'), alt: 'Carbon weave trim close-up', caption: 'Carbon weave', slot: 'inset' },
-  { id: 'dusk', image: media.car, alt: 'VX6 in full sun on the coast road', caption: 'Grand Coupé', slot: 'full' },
+  { id: 'black', image: media.carView('black', 'front'), alt: 'Obsidian Black VX6 head-on on a coastal road', caption: 'Obsidian Black', slot: 'full' },
 ];
 
 /* ───────────── Navigation ───────────── */

@@ -61,8 +61,8 @@ export const media = {
     road: image('wide-road'),
     approach: image('approach'),
   },
-  /** amostras de pintura (configurador) */
-  paint: (id: string) => image(`paint-${id}`),
+  /** carro por cor e ângulo (configurador e galeria) */
+  carView: (color: string, angle: string) => image(`car-${color}-${angle}`),
   /** amostras de acabamento interno (configurador) */
   trim: (id: string) => image(`trim-${id}`),
 } as const;
