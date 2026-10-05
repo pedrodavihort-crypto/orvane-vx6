@@ -11,15 +11,18 @@ gsap.defaults({ ease: EASE, duration: 1.2 });
 ScrollTrigger.config({ ignoreMobileResize: true });
 
 /**
- * `?motion=full` na URL ignora o prefers-reduced-motion do sistema — útil para revisar
- * as animações num computador com "reduzir movimento" ligado. Sem o parâmetro, a preferência é respeitada.
+ * Por decisão do cliente, as animações rodam sempre — mesmo com "reduzir movimento" ligado no sistema.
+ * Para voltar a respeitar a preferência do sistema, troque ALWAYS_ANIMATE para false.
+ * `?motion=reduced` na URL força a versão sem animação (útil para testar acessibilidade).
  */
-export const forceMotion =
-  typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('motion') === 'full';
+const ALWAYS_ANIMATE = true;
+const motionParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('motion') : null;
+export const forceMotion = motionParam === 'reduced' ? false : ALWAYS_ANIMATE || motionParam === 'full';
+const forceReduced = motionParam === 'reduced';
 if (forceMotion) document.documentElement.classList.add('force-motion');
 
 export const prefersReducedMotion = () =>
-  !forceMotion && typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  forceReduced || (!forceMotion && typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 export const isTouch = () =>
   typeof window !== 'undefined' && window.matchMedia('(hover: none), (pointer: coarse)').matches;
@@ -27,9 +30,9 @@ export const isTouch = () =>
 /** Breakpoints usados em gsap.matchMedia */
 const NO_PREF = forceMotion ? '' : ' and (prefers-reduced-motion: no-preference)';
 export const MQ = {
-  desktop: `(min-width: 1024px)${NO_PREF}`,
-  mobile: `(max-width: 1023px)${NO_PREF}`,
-  motion: forceMotion ? 'all' : '(prefers-reduced-motion: no-preference)',
+  desktop: forceReduced ? 'not all' : `(min-width: 1024px)${NO_PREF}`,
+  mobile: forceReduced ? 'not all' : `(max-width: 1023px)${NO_PREF}`,
+  motion: forceReduced ? 'not all' : forceMotion ? 'all' : '(prefers-reduced-motion: no-preference)',
 } as const;
 
 export { gsap, ScrollTrigger };
