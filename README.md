@@ -36,7 +36,7 @@ src/
    - Configurador: `studio-{black|white|red|silver}-{20|21}` e `interior-{black|red|carbon}` — mesmo enquadramento em todas para o crossfade ficar perfeito.
    - Vídeo do hero: até ~6–10 s em loop, H.264 + VP9, sem áudio, com `hero-poster.webp` do primeiro frame.
 
-> O vídeo do hero e as fotos de rua vêm de um vídeo do Pexels (licença de uso livre). As imagens de estúdio, interior e detalhes são **placeholders originais** renderizados a partir de ilustrações vetoriais — troque por fotografia real quando houver.
+> Toda a mídia do carro vem de um único vídeo cinematográfico (hero, fotos e frames). As amostras de pintura e de acabamento interno do configurador são renders procedurais. Troque por fotografia oficial quando houver.
 
 ## Decisões de movimento
 

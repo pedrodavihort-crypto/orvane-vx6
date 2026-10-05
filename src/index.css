@@ -97,7 +97,6 @@ html.lenis body {
   }
   .word-inner {
     display: inline-block;
-    will-change: transform;
   }
 
   /* Hairline with progress segment (reference: short bright stroke on long rule) */

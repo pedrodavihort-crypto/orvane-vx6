@@ -51,8 +51,7 @@ export function Gallery() {
             <SplitWords text="Gallery" />
           </h2>
           <p className="gallery-intro max-w-[22rem] text-[0.9375rem] leading-[1.7] text-smoke md:pb-4">
-            Seven frames from the launch campaign — shot in studio, on the avenue and after dark.
-          </p>
+            Seven frames from the launch campaign, shot on the coast road at last light.</p>
         </div>
 
         <ul className="grid gap-y-14 md:grid-cols-12 md:gap-x-[clamp(1rem,2vw,2rem)] md:gap-y-0">

@@ -34,7 +34,7 @@ export function Intro() {
   return (
     <section id="intro" ref={root} aria-labelledby="intro-title" className="relative bg-ink">
       {/* frase pinada via sticky: o scroll acende palavra por palavra */}
-      <div ref={stage} className="relative h-[230vh]">
+      <div ref={stage} className="relative h-[175vh]">
         <div className="sticky top-0 grid h-[100svh] place-items-center">
           <h2 id="intro-title" className="intro-head display text-center text-[clamp(3.2rem,11vw,11.5rem)] leading-[0.95] tracking-[-0.05em]">
             <SplitWords text={car.intro.headline} />

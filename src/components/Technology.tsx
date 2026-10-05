@@ -3,7 +3,7 @@ import { gsap, MQ } from '../lib/motion';
 import { useGsap } from '../hooks/useGsap';
 import { car } from '../data/car';
 import { media } from '../data/assets';
-import { Picture } from './Picture';
+import { LazyVideo } from './LazyVideo';
 import { SplitWords } from './SplitWords';
 import { revealWords, fadeUp } from '../animations/textAnimations';
 import { parallax } from '../animations/imageAnimations';
@@ -49,11 +49,11 @@ export function Technology() {
   return (
     <section id="technology" ref={root} aria-labelledby="tech-title" className="relative bg-ink">
       {/* capa */}
-      <div className="tech-cover relative h-[100svh] min-h-[600px] overflow-hidden" data-cursor="view">
+      <div className="tech-cover relative h-[100svh] min-h-[600px] overflow-hidden" >
         <div className="tech-media absolute inset-0">
-          <Picture image={media.technology} alt={`${car.fullName} cockpit with curved driver display`} className="h-full w-full object-cover" />
+          <LazyVideo className="h-full w-full object-cover" sources={media.hero.sources} poster={media.hero.poster} aria-hidden="true" />
         </div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(10_10_9/0.8),rgb(10_10_9/0.15)_60%),linear-gradient(0deg,rgb(10_10_9/0.9),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(10_10_9/0.85),rgb(10_10_9/0.35)_65%),linear-gradient(0deg,rgb(10_10_9/0.9),transparent_45%)]" />
         <div className="shell absolute inset-x-0 bottom-[clamp(2.5rem,9vh,6rem)]">
           <p className="tech-label label mb-6 flex items-center gap-3 text-bone/70">
             <span className="h-px w-6 bg-ember-bright" aria-hidden="true" /> Technology

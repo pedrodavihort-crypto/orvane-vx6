@@ -24,8 +24,9 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (prefersReducedMotion()) return;
 
     const instance = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // lerp curto: resposta imediata ao scroll, sem sensação de "arrastado"
+      lerp: 0.11,
+      wheelMultiplier: 1.05,
       smoothWheel: true,
       // Touch mantém o momentum nativo (mais fluido e econômico no mobile)
       syncTouch: false,
@@ -49,7 +50,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     lenis,
     scrollTo: (target, opts = {}) => {
       if (lenis) {
-        lenis.scrollTo(target as never, { offset: opts.offset ?? 0, immediate: opts.immediate, duration: 1.6 });
+        lenis.scrollTo(target as never, { offset: opts.offset ?? 0, immediate: opts.immediate, duration: 1.2 });
         return;
       }
       const el = typeof target === 'string' ? document.querySelector<HTMLElement>(target) : target;

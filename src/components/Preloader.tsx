@@ -22,12 +22,11 @@ export function Preloader({ onDone }: { onDone: () => void }) {
       });
       gsap
         .timeline({ defaults: { ease: 'expo.inOut' } })
-        .to(paths, { strokeDashoffset: 0, duration: 1.6, stagger: 0.15 })
-        .from('.pl-emblem', { opacity: 0.25, duration: 1.6, ease: 'power2.out' }, 0)
-        .from('.pl-caption', { opacity: 0, y: 8, duration: 1 }, 0.4)
-        .to('.pl-emblem', { scale: 1.6, opacity: 0, filter: 'blur(12px)', duration: 1.1, ease: 'power3.in' }, '+=0.25')
-        .to('.pl-caption', { opacity: 0, duration: 0.5 }, '<')
-        .add(onDone, '-=0.35')
+        .to(paths, { strokeDashoffset: 0, duration: 0.9, stagger: 0.1 })
+        .from('.pl-caption', { opacity: 0, y: 8, duration: 0.6 }, 0.2)
+        .to('.pl-emblem', { scale: 1.25, opacity: 0, duration: 0.5, ease: 'power3.in' }, '+=0.05')
+        .to('.pl-caption', { opacity: 0, duration: 0.3 }, '<')
+        .add(onDone, '-=0.25')
         .set(el, { display: 'none' });
     }, el);
     return () => ctx.revert();

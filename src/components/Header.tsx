@@ -33,7 +33,7 @@ export function Header({ visible }: { visible: boolean }) {
       <header
         className={[
           'fixed inset-x-0 top-0 z-50 transition-[background-color,height,backdrop-filter,opacity,transform] duration-700 ease-[var(--ease-film)]',
-          scrolled ? 'h-16 bg-ink/55 backdrop-blur-xl' : 'h-[5.5rem] bg-transparent',
+          scrolled ? 'h-16 bg-ink/80 backdrop-blur-sm' : 'h-[5.5rem] bg-transparent',
           visible ? 'translate-y-0 opacity-100' : '-translate-y-6 opacity-0',
         ].join(' ')}
       >

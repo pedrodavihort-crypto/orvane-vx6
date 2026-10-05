@@ -46,7 +46,7 @@ export function Design() {
             {blocks.map((b, i) => (
               <div
                 key={b.id}
-                className={`absolute inset-0 transition-[opacity,transform] duration-[1400ms] ease-[var(--ease-film)] ${
+                className={`absolute inset-0 transition-[opacity,transform] duration-[1000ms] ease-[var(--ease-film)] ${
                   i === active ? 'scale-100 opacity-100' : 'scale-[1.06] opacity-0'
                 }`}
                 aria-hidden={i !== active}

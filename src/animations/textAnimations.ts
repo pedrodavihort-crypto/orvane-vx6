@@ -9,8 +9,8 @@ export function revealWords(
 ) {
   return gsap.from(words, {
     yPercent: 115,
-    duration: opts.duration ?? 1.4,
-    stagger: opts.stagger ?? 0.08,
+    duration: opts.duration ?? 1.1,
+    stagger: opts.stagger ?? 0.06,
     ease: EASE,
     delay: opts.delay ?? 0,
     scrollTrigger: opts.trigger ? { trigger: opts.trigger, start: opts.start ?? 'top 82%', once: true } : undefined,
@@ -21,12 +21,13 @@ export function revealWords(
 export function scrubWords(words: Target, trigger: Element, opts: { start?: string; end?: string } = {}) {
   return gsap.fromTo(
     words,
-    { opacity: 0.1 },
+    { opacity: 0.08, yPercent: 45 },
     {
       opacity: 1,
-      ease: 'none',
-      stagger: 0.5,
-      scrollTrigger: { trigger, start: opts.start ?? 'top 70%', end: opts.end ?? 'center 45%', scrub: 0.8 },
+      yPercent: 0,
+      ease: 'power2.out',
+      stagger: 0.4,
+      scrollTrigger: { trigger, start: opts.start ?? 'top 70%', end: opts.end ?? 'center 45%', scrub: true },
     },
   );
 }
@@ -36,8 +37,8 @@ export function fadeUp(targets: Target, trigger: Element | null, opts: { stagger
   return gsap.from(targets, {
     opacity: 0,
     y: opts.y ?? 28,
-    duration: 1.3,
-    stagger: opts.stagger ?? 0.12,
+    duration: 1,
+    stagger: opts.stagger ?? 0.1,
     ease: EASE,
     scrollTrigger: { trigger: trigger ?? undefined, start: opts.start ?? 'top 80%', once: true },
   });
@@ -50,7 +51,7 @@ export function countUp(el: HTMLElement, value: number, decimals: number, trigge
   el.textContent = fmt(0);
   return gsap.to(state, {
     v: value,
-    duration: 2.2,
+    duration: 1.6,
     ease: 'power3.out',
     onUpdate: () => {
       el.textContent = fmt(state.v);

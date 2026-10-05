@@ -79,7 +79,7 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
         </nav>
         <aside className="menu-aside hidden self-end lg:block">
           <div className="media aspect-[16/10]">
-            <Picture image={media.heroThumb} alt={`${car.fullName} in Glacier White`} sizes="35vw" />
+            <Picture image={media.heroThumb} alt={`${car.fullName} in Obsidian Black`} sizes="35vw" />
           </div>
           <div className="mt-6 flex items-end justify-between">
             <p className="max-w-[18rem] text-sm leading-relaxed text-smoke">

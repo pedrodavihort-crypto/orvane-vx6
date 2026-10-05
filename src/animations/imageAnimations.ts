@@ -39,10 +39,10 @@ export function clipExpand(frame: Element, trigger: Element, opts: { from?: stri
 /** Entrada única de imagem: wipe vertical + assentamento de escala. */
 export function wipeIn(frame: Element, media: Element, trigger: Element) {
   const tl = gsap.timeline({ scrollTrigger: { trigger, start: 'top 85%', once: true } });
-  tl.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' }).from(
+  tl.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'expo.inOut' }).from(
     media,
-    { scale: 1.3, duration: 2, ease: 'expo.out' },
-    0.2,
+    { scale: 1.35, duration: 1.6, ease: 'expo.out' },
+    0.1,
   );
   return tl;
 }

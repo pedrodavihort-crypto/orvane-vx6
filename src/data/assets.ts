@@ -45,22 +45,24 @@ export const media = {
       { src: heroMp4, type: 'video/mp4' },
     ],
   },
-  heroThumb: image('street-tall'),
+  heroThumb: image('approach'),
+  car: image('car-hero'),
   form: image('form'),
   street: image('street'),
   streetTall: image('street-tall'),
   ctaStreet: image('cta-street'),
-  nightHero: image('night-hero'),
   design: {
     exterior: image('design-exterior'),
-    interior: image('interior-red'),
+    interior: image('trim-red'),
   },
-  technology: image('interior-black'),
   detail: {
-    wheel: image('detail-wheel'),
-    headlight: image('detail-headlight'),
-    profile: image('detail-profile'),
+    front: image('detail-front'),
+    coast: image('detail-coast'),
+    road: image('wide-road'),
+    approach: image('approach'),
   },
-  studio: (paint: string, wheels: string) => image(`studio-${paint}-${wheels}`),
-  interior: (trim: string) => image(`interior-${trim}`),
+  /** amostras de pintura (configurador) */
+  paint: (id: string) => image(`paint-${id}`),
+  /** amostras de acabamento interno (configurador) */
+  trim: (id: string) => image(`trim-${id}`),
 } as const;

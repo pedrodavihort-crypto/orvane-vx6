@@ -15,7 +15,8 @@ export function Performance() {
     const grid = r.querySelector('.perf-grid')!;
     gsap.from('.perf-hline', { scaleX: 0, transformOrigin: 'left', duration: 1.8, ease: 'expo.inOut', scrollTrigger: { trigger: grid, start: 'top 85%', once: true } });
     gsap.from('.perf-vline', { scaleY: 0, transformOrigin: 'top', duration: 1.6, ease: 'expo.inOut', stagger: 0.15, scrollTrigger: { trigger: grid, start: 'top 80%', once: true } });
-    gsap.from('.perf-cell', { opacity: 0, y: 40, duration: 1.4, stagger: 0.12, scrollTrigger: { trigger: grid, start: 'top 80%', once: true } });
+    gsap.from('.perf-cell dt, .perf-unit', { opacity: 0, duration: 1, stagger: 0.08, scrollTrigger: { trigger: grid, start: 'top 80%', once: true } });
+    gsap.from('.perf-num', { yPercent: 105, duration: 1.2, ease: 'expo.out', stagger: 0.1, scrollTrigger: { trigger: grid, start: 'top 78%', once: true } });
     r.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
       countUp(el, Number(el.dataset.count), Number(el.dataset.decimals), grid);
     });
@@ -45,14 +46,16 @@ export function Performance() {
               {i > 0 ? <span className="perf-vline absolute inset-y-0 left-0 hidden w-px bg-line md:block" aria-hidden="true" /> : null}
               <dt className="label text-smoke">{m.label}</dt>
               <dd className="flex items-baseline gap-3">
-                <span
-                  className="display tabular-nums text-[clamp(5rem,9.5vw,10.5rem)] leading-[0.85]"
-                  data-count={m.value}
-                  data-decimals={m.decimals}
-                >
-                  {m.value.toFixed(m.decimals)}
+                <span className="word">
+                  <span
+                    className="perf-num word-inner display tabular-nums text-[clamp(5rem,9.5vw,10.5rem)] leading-[0.85]"
+                    data-count={m.value}
+                    data-decimals={m.decimals}
+                  >
+                    {m.value.toFixed(m.decimals)}
+                  </span>
                 </span>
-                <span className="text-[clamp(1rem,1.4vw,1.375rem)] text-bone/70">{m.unit}</span>
+                <span className="perf-unit text-[clamp(1rem,1.4vw,1.375rem)] text-bone/70">{m.unit}</span>
               </dd>
             </div>
           ))}

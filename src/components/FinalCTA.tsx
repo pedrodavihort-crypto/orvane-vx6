@@ -22,7 +22,7 @@ export function FinalCTA() {
   return (
     <section ref={root} aria-labelledby="cta-title" className="relative flex h-[100svh] min-h-[640px] items-start justify-center overflow-hidden bg-ink pt-[clamp(6rem,17vh,11rem)]">
       <div className="cta-media absolute inset-0" data-cursor="view">
-        <Picture image={media.ctaStreet} alt={`${car.fullName} in Glacier White on the road`} className="h-full w-full object-cover" />
+        <Picture image={media.ctaStreet} alt={`${car.fullName} on the coast road at sunset`} className="h-full w-full object-cover" />
       </div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_70%,rgb(10_10_9/0.1),rgb(10_10_9/0.75))]" />
       <div className="shell relative z-10 flex flex-col items-center text-center">

@@ -77,7 +77,7 @@ export function Lightbox({ items, index, onClose, onIndex }: Props) {
       role="dialog"
       aria-modal="true"
       aria-label={`Image ${index + 1} of ${items.length}: ${item.caption}`}
-      className="fixed inset-0 z-[80] grid grid-rows-[auto_1fr_auto] bg-ink/97 backdrop-blur-sm"
+      className="fixed inset-0 z-[80] grid grid-rows-[auto_1fr_auto] bg-ink/97"
       data-lenis-prevent
     >
       <div className="shell flex h-20 items-center justify-between">

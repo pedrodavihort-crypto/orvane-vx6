@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react';
+import { useId, useRef, useState, type ReactNode } from 'react';
 import { useGsap } from '../hooks/useGsap';
 import { car, configurator, type Paint, type Trim, type Wheels } from '../data/car';
 import { media } from '../data/assets';
@@ -7,7 +7,9 @@ import { SplitWords } from './SplitWords';
 import { revealWords, fadeUp } from '../animations/textAnimations';
 import { ArrowRight } from './Icons';
 
-type View = 'exterior' | 'interior';
+type View = 'vehicle' | 'paint' | 'interior';
+
+const VIEW_LABEL: Record<View, string> = { vehicle: 'Vehicle', paint: 'Paint', interior: 'Interior' };
 
 interface Option {
   id: string;
@@ -77,12 +79,23 @@ function OptionGroup<T extends string>({
   );
 }
 
+function Layer({ on, children }: { on: boolean; children: ReactNode }) {
+  return (
+    <div
+      className={`absolute inset-0 transition-[opacity,transform] duration-[900ms] ease-[var(--ease-film)] ${on ? 'scale-100 opacity-100' : 'scale-[1.05] opacity-0'}`}
+      aria-hidden={!on}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function Configurator() {
   const root = useRef<HTMLElement>(null);
-  const [paint, setPaint] = useState<Paint>('red');
+  const [paint, setPaint] = useState<Paint>('black');
   const [wheels, setWheels] = useState<Wheels>('21');
   const [trim, setTrim] = useState<Trim>('black');
-  const [view, setView] = useState<View>('exterior');
+  const [view, setView] = useState<View>('vehicle');
 
   useGsap(root, () => {
     revealWords('.cfg-title .word-inner', { trigger: root.current, start: 'top 70%' });
@@ -94,7 +107,6 @@ export function Configurator() {
   const wheelName = configurator.wheels.find((w) => w.id === wheels)!.name;
   const trimName = configurator.interior.find((t) => t.id === trim)!.name;
 
-  const exteriorKeys = configurator.exterior.flatMap((p) => configurator.wheels.map((w) => `${p.id}-${w.id}`));
 
   return (
     <section id="configure" ref={root} aria-labelledby="cfg-title" className="relative bg-coal py-[16vh]">
@@ -109,7 +121,7 @@ export function Configurator() {
             </h2>
           </div>
           <div role="tablist" aria-label="Stage view" className="flex gap-6 self-start md:self-end md:pb-3">
-            {(['exterior', 'interior'] as View[]).map((v) => (
+            {(['vehicle', 'paint', 'interior'] as View[]).map((v) => (
               <button
                 key={v}
                 role="tab"
@@ -119,7 +131,7 @@ export function Configurator() {
                 className={`link label transition-colors ${view === v ? 'text-bone' : 'text-smoke hover:text-bone'}`}
                 aria-current={view === v}
               >
-                {v}
+                {VIEW_LABEL[v]}
               </button>
             ))}
           </div>
@@ -129,54 +141,50 @@ export function Configurator() {
           {/* palco */}
           <div className="cfg-stage">
             <div className="media relative aspect-[12/7] bg-graphite" data-cursor="view" aria-live="polite">
-              {exteriorKeys.map((k) => {
-                const [p, w] = k.split('-');
-                const on = view === 'exterior' && p === paint && w === wheels;
-                return (
-                  <div
-                    key={k}
-                    className={`absolute inset-0 transition-[opacity,transform] duration-[1100ms] ease-[var(--ease-film)] ${on ? 'opacity-100' : 'opacity-0'}`}
-                    aria-hidden={!on}
-                  >
-                    <Picture
-                      image={media.studio(p, w)}
-                      alt={on ? `${car.fullName} in ${paintName} with ${wheelName} wheels` : ''}
-                      sizes="(min-width:1024px) 66vw, 100vw"
-                      className="h-full w-full scale-[1.22] object-cover object-[50%_42%]"
-                    />
-                  </div>
-                );
-              })}
-              {configurator.interior.map((t) => {
-                const on = view === 'interior' && t.id === trim;
-                return (
-                  <div
-                    key={t.id}
-                    className={`absolute inset-0 transition-[opacity,transform] duration-[1100ms] ease-[var(--ease-film)] ${on ? 'scale-100 opacity-100' : 'scale-[1.04] opacity-0'}`}
-                    aria-hidden={!on}
-                  >
-                    <Picture
-                      image={media.interior(t.id)}
-                      alt={on ? `${car.fullName} interior in ${t.name}` : ''}
-                      sizes="(min-width:1024px) 66vw, 100vw"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                );
-              })}
+              <Layer on={view === 'vehicle'}>
+                <Picture
+                  image={media.car}
+                  alt={view === 'vehicle' ? `${car.fullName} on a coast road` : ''}
+                  sizes="(min-width:1024px) 66vw, 100vw"
+                  className="h-full w-full object-cover"
+                />
+              </Layer>
+              {configurator.exterior.map((p) => (
+                <Layer key={p.id} on={view === 'paint' && p.id === paint}>
+                  <Picture
+                    image={media.paint(p.id)}
+                    alt={view === 'paint' && p.id === paint ? `${p.name} paint sample` : ''}
+                    sizes="(min-width:1024px) 66vw, 100vw"
+                    className="h-full w-full object-cover"
+                  />
+                </Layer>
+              ))}
+              {configurator.interior.map((t) => (
+                <Layer key={t.id} on={view === 'interior' && t.id === trim}>
+                  <Picture
+                    image={media.trim(t.id)}
+                    alt={view === 'interior' && t.id === trim ? `${t.name} sample` : ''}
+                    sizes="(min-width:1024px) 66vw, 100vw"
+                    className="h-full w-full object-cover"
+                  />
+                </Layer>
+              ))}
+              <p className="label pointer-events-none absolute bottom-5 left-5 text-bone/80" aria-hidden="true">
+                {view === 'vehicle' ? 'Shown in Obsidian Black' : view === 'paint' ? `Paint sample · ${paintName}` : `Trim sample · ${trimName}`}
+              </p>
             </div>
             <div className="mt-5 flex flex-wrap items-baseline justify-between gap-3 text-[0.8125rem]">
               <p className="text-bone/90">
                 {car.fullName} <span className="text-smoke">— {paintName} · {wheelName} · {trimName}</span>
               </p>
-              <p className="label text-smoke">{view === 'exterior' ? 'Exterior view' : 'Interior view'}</p>
+              <p className="label text-smoke">{VIEW_LABEL[view]} view</p>
             </div>
           </div>
 
           {/* painel */}
           <div className="cfg-panel flex flex-col gap-8">
-            <OptionGroup<Paint> legend="Exterior" kind="swatch" options={configurator.exterior} value={paint} onChange={(v) => { setPaint(v); setView('exterior'); }} />
-            <OptionGroup<Wheels> legend="Wheels" kind="text" options={configurator.wheels} value={wheels} onChange={(v) => { setWheels(v); setView('exterior'); }} />
+            <OptionGroup<Paint> legend="Exterior" kind="swatch" options={configurator.exterior} value={paint} onChange={(v) => { setPaint(v); setView('paint'); }} />
+            <OptionGroup<Wheels> legend="Wheels" kind="text" options={configurator.wheels} value={wheels} onChange={(v) => { setWheels(v); setView('vehicle'); }} />
             <OptionGroup<Trim> legend="Interior" kind="swatch" options={configurator.interior} value={trim} onChange={(v) => { setTrim(v); setView('interior'); }} />
             <div className="cfg-fade mt-auto flex flex-col gap-3 border-t border-line pt-8">
               <a href="#contact" className="btn btn--light justify-between">

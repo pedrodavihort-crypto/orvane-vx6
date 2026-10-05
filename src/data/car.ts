@@ -45,9 +45,9 @@ export const car = {
       id: 'exterior',
       index: '01',
       title: 'Exterior',
-      body: 'A single unbroken line runs from the headlight to the ducktail. Wide haunches, a low glasshouse and a full-width light signature give the VX6 a stance that reads as speed — even at rest.',
+      body: 'A single unbroken line runs from the light blade to the tail. A low glasshouse, wide haunches and a full-width light signature give the VX6 a stance that reads as speed — even at rest.',
       image: media.design.exterior,
-      alt: 'Orvane VX6 in Ember Red, side profile in a grey studio',
+      alt: 'Orvane VX6 in Obsidian Black on a coast road at golden hour',
     },
     {
       id: 'interior',
@@ -55,7 +55,7 @@ export const car = {
       title: 'Interior',
       body: 'Hand-stitched leather, open-pore carbon and a curved 14.5-inch driver display. Every surface you touch is real; every control sits exactly where your hand expects it.',
       image: media.design.interior,
-      alt: 'Orvane VX6 cockpit with red leather trim and curved display',
+      alt: 'Rosso leather with contrast double stitching',
     },
   ] satisfies DesignBlock[],
 
@@ -130,13 +130,13 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  { id: 'avenue', image: media.street, alt: 'White VX6 driving down a palm-lined avenue', caption: 'Avenue, late afternoon', slot: 'large' },
-  { id: 'wheel', image: media.detail.wheel, alt: 'Close-up of the 21-inch forged wheel and red brake caliper', caption: '21" Performance forged wheel', slot: 'small' },
-  { id: 'headlight', image: media.detail.headlight, alt: 'Full-width headlight signature glowing in darkness', caption: 'Light signature', slot: 'wide' },
-  { id: 'profile', image: media.detail.profile, alt: 'Silver VX6 roofline and glasshouse in a studio', caption: 'Mercury Silver', slot: 'horizontal' },
-  { id: 'approach', image: media.streetTall, alt: 'White VX6 approaching under the palms', caption: 'Glacier White', slot: 'tall' },
-  { id: 'carbon', image: media.interior('carbon'), alt: 'Cockpit trimmed in carbon weave', caption: 'Carbon Weave interior', slot: 'inset' },
-  { id: 'night', image: media.nightHero, alt: 'Obsidian Black VX6 lit only by its lights', caption: 'Obsidian Black', slot: 'full' },
+  { id: 'coast', image: media.street, alt: 'VX6 on a coast road at golden hour', caption: 'Coast road, last light', slot: 'large' },
+  { id: 'front', image: media.detail.front, alt: 'Low sun across the VX6 light blade and bonnet', caption: 'Light signature', slot: 'small' },
+  { id: 'road', image: media.detail.road, alt: 'VX6 following the cliff road', caption: 'Along the cliffs', slot: 'wide' },
+  { id: 'ocean', image: media.detail.coast, alt: 'VX6 with the ocean behind it', caption: 'Ocean line', slot: 'horizontal' },
+  { id: 'approach', image: media.detail.approach, alt: 'VX6 approaching head-on', caption: 'Obsidian Black', slot: 'tall' },
+  { id: 'carbon', image: media.trim('carbon'), alt: 'Carbon weave trim close-up', caption: 'Carbon weave', slot: 'inset' },
+  { id: 'dusk', image: media.car, alt: 'VX6 in full sun on the coast road', caption: 'Grand Coupé', slot: 'full' },
 ];
 
 /* ───────────── Navigation ───────────── */
